@@ -6,17 +6,17 @@ const NFTS = [
   {
     id: 1,
     name: "NFT Example #1",
-    img: "url",
+    img: "/nft_1.png",
   },
   {
     id: 2,
     name: "NFT Example #2",
-    img: "url",
+    img: "/nft_2.png",
   },
   {
     id: 3,
     name: "NFT Example #3",
-    img: "url",
+    img: "/nft_3.png",
   },
 ];
 
@@ -30,11 +30,14 @@ function Detail() {
       </div>
       <div className="container lg:mx-16 mt-5 grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols:1">
         <div className="col-span-2">
-          <img
-            className="rounded border border-solid border-gray-600"
-            src="/NFT PRUEBA.png"
-            alt="department"
-          />
+          <div className="relative">
+            <img
+              className="rounded border border-solid border-gray-600"
+              src="/NFT PRUEBA.png"
+              alt="department"
+            />
+            <img className="absolute top-[7rem] left-[10.7rem] transform -rotate-13" src="/nft_1.png" alt="nft1" width="37" />
+          </div>
         </div>
         <div className="col-span-2 lg:mx-10">
           <div className="text-3xl text-gray-700">Place #1-A</div>
@@ -49,7 +52,20 @@ function Detail() {
                     <div className="relative mt-1 text-gray-500">
                       <Listbox.Button className="relative w-full py-2 pl-3 pr-10 text-left bg-white border border-gray-500 rounded-sm shadow-md cursor-default focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-orange-300 focus-visible:ring-offset-2 focus-visible:border-indigo-500 sm:text-sm">
                         <span className="block truncate">
-                          {selected?.name ?? "Select your nft to showcase"}
+                          {selected ? (
+                            <div className="inline-flex">
+                              <div>
+                                <img
+                                  src={selected.img}
+                                  alt={selected.name}
+                                  width="20px"
+                                />
+                              </div>
+                              <div className="ml-1">{selected.name}</div>
+                            </div>
+                          ) : (
+                            "Select your nft to showcase"
+                          )}
                         </span>
                         <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
                           <SelectorIcon
@@ -74,7 +90,7 @@ function Detail() {
                                     ? "text-amber-900 bg-amber-100"
                                     : "text-gray-900"
                                 }
-                          cursor-default select-none relative py-2 pl-10 pr-4`
+                          cursor-default select-none relative py-2 pl-5 pr-4`
                               }
                               value={nft}
                             >
@@ -85,7 +101,16 @@ function Detail() {
                                       selected ? "font-medium" : "font-normal"
                                     } block truncate`}
                                   >
-                                    {nft.name}
+                                    <div className="inline-flex">
+                                      <div>
+                                        <img
+                                          src={nft.img}
+                                          alt={nft.name}
+                                          width="20px"
+                                        />
+                                      </div>
+                                      <div className="ml-1">{nft.name}</div>
+                                    </div>
                                   </span>
                                   {selected ? (
                                     <span
